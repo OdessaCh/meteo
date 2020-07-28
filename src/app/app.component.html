@@ -1,15 +1,47 @@
-<h1>Méteo </h1>
+<div class="entete">
+  <div class="logo">odd</div>
+  <div class="titre">
+    <h1>Méteo {{nomVille}} </h1>
+  </div>
+  <div class="champtexte">
     <mat-form-field class="example-full-width">
       <mat-label>Entrez la ville de votre choix</mat-label>
-    <input matInput placeholder="Ex. Paris" [(ngModel)]="nomVille"> 
-      </mat-form-field>
-      <button mat-icon-button color="primary" (click)="getINSEE()">
-        <mat-icon>search</mat-icon></button>
-<div>Température actuelle: </div>
-{{temperature}}°C
-<div>Probabilité pluie:</div>
-{{pluie}}%
-<div>Vitesse du vent:</div>
-{{vent}}km/h
-<div>Temps actuel:</div>
-{{ listeConditions.get(conditionsClimatiques) }}
+      <input (keyup.enter)="getINSEE()" matInput placeholder="Ex. Paris" [(ngModel)]="nomVille">
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="getINSEE()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="meteoActuelle">
+  <div>Temps actuel: {{ listeConditions.get(codeTemps) }}</div>
+  <img src="https://img.icons8.com/officel/480/000000/{{listeImages.get(codeTemps)}}.png" height="200px" />
+  <div>Température actuelle: </div>
+  {{temperature}}°C
+  <div>Probabilité pluie: {{pluie}}%</div>
+  <div>Vitesse du vent: {{vent}}km/h</div>
+</div>
+
+Température des 7 prochains jours:
+<div class="previsions">
+  <div class="miniature" *ngFor="let jour of previsions; index as i">
+    J+{{ i + 1 }}
+    prévision<img src="https://img.icons8.com/officel/480/000000/{{listeImages.get(jour.codeTempsPrevisions)}}.png"
+      height="100px" />
+    Tmax = {{ jour.tempMax }}°C
+    Tmin = {{ jour.tempMini}}°C
+    Vitesse du vent {{jour.vitesseVent}}km/h
+    Probabilité pluie = {{jour.probaPluie}}%
+
+  </div>
+</div>
+<!-- <img src="https://img.icons8.com/officel/480/000000/summer.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/partly-cloudy-day.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/clouds.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/partly-cloudy-rain.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/windy-weather.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/rain.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/snow.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/storm.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/cloud-lighting.png" height="200px" />
+<img src="https://img.icons8.com/officel/480/000000/hail.png" height="200px" /> -->
