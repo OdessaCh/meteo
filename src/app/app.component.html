@@ -1,5 +1,5 @@
 <div class="entete">
-  <div class="logo">odd</div>
+  <div class="logo"><img src="https://img.icons8.com/officel/460/000000/rainy-weather.png" height="55px"/></div>
   <div class="titre">
     <h1>Méteo {{nomVille}} </h1>
   </div>
@@ -8,33 +8,49 @@
       <mat-label>Entrez la ville de votre choix</mat-label>
       <input (keyup.enter)="getINSEE()" matInput placeholder="Ex. Paris" [(ngModel)]="nomVille">
     </mat-form-field>
-    <button mat-icon-button color="primary" (click)="getINSEE()">
+    <button mat-icon-button  (click)="getINSEE()">
       <mat-icon>search</mat-icon>
     </button>
   </div>
 </div>
-<div class="meteoActuelle">
-  <div>Temps actuel: {{ listeConditions.get(codeTemps) }}</div>
-  <img src="https://img.icons8.com/officel/480/000000/{{listeImages.get(codeTemps)}}.png" height="200px" />
-  <div>Température actuelle: </div>
-  {{temperature}}°C
-  <div>Probabilité pluie: {{pluie}}%</div>
-  <div>Vitesse du vent: {{vent}}km/h</div>
-</div>
+<div class="tout">
+  <div class="meteoActuelle">
+    <div>Temps actuel du {{dateHeure}} :  {{ listeConditions.get(codeTemps) }}</div>
+    <div class="imageDescriptionActuelle">
+      <div class="imageMeteo"><img src="https://img.icons8.com/officel/480/000000/{{listeImages.get(codeTemps)}}.png"
+          height="200px" /></div>
+      <div class="descriptionMeteoActuelle">
+        <div>Température actuelle: </div>
+        {{temperature}}°C
+        <div>Probabilité pluie: {{pluie}}%</div>
+        <div>Vitesse du vent: {{vent}}km/h</div>
+      </div>
+    </div>
+  </div>
 
-Température des 7 prochains jours:
-<div class="previsions">
-  <div class="miniature" *ngFor="let jour of previsions; index as i">
-    J+{{ i + 1 }}
-    prévision<img src="https://img.icons8.com/officel/480/000000/{{listeImages.get(jour.codeTempsPrevisions)}}.png"
-      height="100px" />
-    Tmax = {{ jour.tempMax }}°C
-    Tmin = {{ jour.tempMini}}°C
-    Vitesse du vent {{jour.vitesseVent}}km/h
-    Probabilité pluie = {{jour.probaPluie}}%
+  Température des 6 prochains jours:
+  <div class="previsions">
+    <div class="miniature" *ngFor="let jour of previsions; index as i">
+      {{jour.nomJour}}
+      <div class="imageEtTemperature">
+        <img src="https://img.icons8.com/officel/480/000000/{{listeImages.get(jour.codeTempsPrevisions)}}.png"
+          height="75px" />
+        <div class="tempMaxMini">
+          <div class="tempMax"><img src="https://img.icons8.com/material-rounded/480/000000/up.png"
+              height="20px" />{{ jour.tempMax }}°C
+          </div>
+          <div class="tempMini"><img src="https://img.icons8.com/material-rounded/480/000000/down.png" height="20px" />
+            {{ jour.tempMini}}°C
+          </div>
+        </div>
+      </div>
+      Probabilité pluie: {{jour.probaPluie}}%<br />
+      Vitesse du vent: {{jour.vitesseVent}}km/h
 
+    </div>
   </div>
 </div>
+
 <!-- <img src="https://img.icons8.com/officel/480/000000/summer.png" height="200px" />
 <img src="https://img.icons8.com/officel/480/000000/partly-cloudy-day.png" height="200px" />
 <img src="https://img.icons8.com/officel/480/000000/clouds.png" height="200px" />
