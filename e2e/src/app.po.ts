@@ -10,6 +10,3 @@ export class AppPage {
   }
 }
 
-
-
-
